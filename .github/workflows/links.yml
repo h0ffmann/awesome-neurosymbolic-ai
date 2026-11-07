@@ -21,10 +21,10 @@ jobs:
     name: Check links
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Restore lychee cache
-        uses: actions/cache@v4
+        uses: actions/cache@v6
         with:
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
@@ -44,7 +44,7 @@ jobs:
 
       - name: Open an issue with the report (scheduled runs)
         if: github.event_name == 'schedule' && steps.lychee.outputs.exit_code != 0
-        uses: peter-evans/create-issue-from-file@v5
+        uses: peter-evans/create-issue-from-file@v6
         with:
           title: "Link checker report"
           content-filepath: ./lychee/out.md
