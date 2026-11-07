@@ -162,7 +162,7 @@ Where most practical adoption is happening today: pairing large language models 
 ## Benchmarks and Datasets
 
 - [CLEVR](https://github.com/facebookresearch/clevr-dataset-gen) - Diagnostic dataset for compositional visual reasoning, the classic testbed for neurosymbolic VQA. ⭐ 653 · last commit 2019-03-22 · 0 commits in 2026.
-- [FOLIO](https://github.com/Yale-LILY/FOLIO) - First-order logic reasoning benchmark with natural language annotated by logicians. ⭐ 148 · last commit 2023-12-21 · 0 commits in 2026.
+- [FOLIO](https://github.com/Yale-LILY/FOLIO) - First-order logic reasoning benchmark with natural language annotated by logicians. ⭐ 148 · last commit 2023-12-22 · 0 commits in 2026.
 - [ProofWriter](https://allenai.org/data/proofwriter) - Datasets of entailment trees for rule-based reasoning over natural language from AI2.
 - [ARC-AGI](https://github.com/fchollet/ARC-AGI) - Chollet's Abstraction and Reasoning Corpus, a benchmark of core-knowledge program induction tasks. ⭐ 4,856 · last commit 2025-04-04 · 0 commits in 2026.
 - [rsbench](https://unitn-sml.github.io/rsbench) - Suite for systematically evaluating reasoning shortcuts in neurosymbolic models.
