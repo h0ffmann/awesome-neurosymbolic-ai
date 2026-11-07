@@ -4,7 +4,7 @@
   Built by scripts/build_readme.py via .github/workflows/stats.yml.
 -->
 <div align="center">
-	<img src="assets/banner.svg" alt="Awesome Neurosymbolic AI banner" width="100%">
+	<img src="assets/banner.svg" alt="A neural network flowing into the universal quantifier, drawn from Desmos equations" width="100%">
 </div>
 
 # Awesome Neurosymbolic AI [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
