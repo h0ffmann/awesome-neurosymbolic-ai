@@ -15,18 +15,24 @@ Internal notes on how this repository is set up and maintained. Contributors don
 
 ## Automation overview
 
+## README.base.md vs README.md
+
+`README.base.md` is the **source of truth** that humans edit. `README.md` is **generated** by `scripts/build_readme.py`, which appends live metrics to every entry whose primary link is a GitHub repository: `⭐ stars · last commit YYYY-MM-DD · N commits in <year>`. The Metrics workflow rebuilds it weekly and on every push to main that touches the base file; CI blocks PRs that edit `README.md` without `README.base.md`.
+
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) plus `scripts/check_list.py` (entry format, duplicate URLs, ToC consistency). |
+| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) on `README.md`, `scripts/check_list.py` on `README.base.md` (entry format, duplicate URLs, ToC consistency), and rejects direct edits to the generated readme. |
 | `links.yml` | weekly cron, PRs touching the markdown, manual | Runs [lychee](https://github.com/lycheeverse/lychee) with `lychee.toml`. Fails PRs on broken links; on the weekly run it opens an issue with the report instead. |
+| `stats.yml` | weekly cron, push to main touching `README.base.md`, manual | Rebuilds `README.md` with fresh repo metrics and commits it. |
 | `dependabot.yml` | monthly | Keeps the pinned GitHub Actions up to date, grouped into one PR. |
 
 Run the checks locally:
 
 ```sh
 npx awesome-lint
-python scripts/check_list.py README.md
-lychee --config lychee.toml README.md   # needs the lychee binary
+python scripts/check_list.py README.base.md
+GITHUB_TOKEN=$(gh auth token) python scripts/build_readme.py
+lychee --config lychee.toml README.base.md   # needs the lychee binary
 ```
 
 ## Curation policy (summary)

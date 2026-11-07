@@ -7,7 +7,7 @@ on:
   # Verify links touched by pull requests.
   pull_request:
     paths:
-      - "README.md"
+      - "README.base.md"
       - "contributing.md"
       - "code-of-conduct.md"
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
             --config lychee.toml
             --cache
             --max-cache-age 3d
-            README.md contributing.md code-of-conduct.md
+            README.base.md contributing.md code-of-conduct.md
           # Fail the check on pull requests; on the weekly run we file an issue instead.
           fail: ${{ github.event_name == 'pull_request' }}
 
