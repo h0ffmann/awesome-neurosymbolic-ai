@@ -35,6 +35,8 @@ jobs:
           python-version: "3.12"
       - name: Validate entries, ToC, and duplicates (source of truth)
         run: python scripts/check_list.py README.base.md
+      - name: Check the banner drawing against its Desmos equations
+        run: python scripts/draw_banner.py --check
       - name: Ensure PRs edit README.base.md, not the generated README.md
         if: github.event_name == 'pull_request'
         run: |
