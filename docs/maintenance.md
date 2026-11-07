@@ -31,9 +31,12 @@ Run the checks locally:
 ```sh
 npx awesome-lint
 python scripts/check_list.py README.base.md
+python scripts/draw_banner.py --check
 GITHUB_TOKEN=$(gh auth token) python scripts/build_readme.py
 lychee --config lychee.toml README.base.md   # needs the lychee binary
 ```
+
+The banner is a drawing from Desmos equations; see [`assets/README.md`](../assets/README.md).
 
 ## Curation policy (summary)
 
