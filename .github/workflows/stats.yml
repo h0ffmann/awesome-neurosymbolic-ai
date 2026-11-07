@@ -1,0 +1,44 @@
+name: Metrics
+
+on:
+  # Weekly refresh of stars / last-commit / yearly-commit annotations.
+  schedule:
+    - cron: "43 5 * * 1"
+  # Rebuild when the source list changes on main.
+  push:
+    branches: [main]
+    paths:
+      - "README.base.md"
+      - "scripts/build_readme.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-readme:
+    name: Rebuild README with repo metrics
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build README.md from README.base.md
+        run: python scripts/build_readme.py README.base.md README.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "README.md already up to date."
+          else
+            git commit -m "chore: refresh repository metrics in README [skip ci]"
+            git push
+          fi

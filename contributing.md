@@ -36,13 +36,15 @@ Entries follow the [awesome-lint](https://github.com/sindresorhus/awesome-lint) 
 
 ## How to submit
 
+> **Edit `README.base.md`, not `README.md`.** The readme is generated: a workflow rebuilds `README.md` from `README.base.md`, appending live metrics (stars, last commit, commits this year) to every GitHub entry. CI rejects pull requests that edit `README.md` directly. Don't add metrics yourself — the bot does it.
+
 1. Fork the repository and create a branch: `git checkout -b add-project-name`.
-2. Make your change. **One entry (or one tightly related group of changes) per pull request.**
+2. Make your change **in `README.base.md`**. One entry (or one tightly related group of changes) per pull request.
 3. Run the checks locally (optional but appreciated):
 
    ```sh
    npx awesome-lint
-   python scripts/check_list.py README.md
+   python scripts/check_list.py README.base.md
    ```
 
 4. Open a pull request with the title `Add Project Name` and fill in the template, including a line on **why** the entry is awesome.

@@ -28,8 +28,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Validate entries, ToC, and duplicates
-        run: python scripts/check_list.py README.md
+      - name: Validate entries, ToC, and duplicates (source of truth)
+        run: python scripts/check_list.py README.base.md
+      - name: Ensure PRs edit README.base.md, not the generated README.md
+        if: github.event_name == 'pull_request'
+        run: |
+          changed=$(git diff --name-only "${{ github.event.pull_request.base.sha }}" HEAD)
+          if echo "$changed" | grep -qx 'README.md' && ! echo "$changed" | grep -qx 'README.base.md'; then
+            echo "::error file=README.md::README.md is generated from README.base.md by scripts/build_readme.py — make your change in README.base.md instead."
+            exit 1
+          fi
