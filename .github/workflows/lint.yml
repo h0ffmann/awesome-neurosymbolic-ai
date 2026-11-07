@@ -20,8 +20,10 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22
+      # Lint the source of truth: README.md is generated and intentionally
+      # richer than the awesome-list format (metric tables).
       - name: Run awesome-lint
-        run: npx --yes awesome-lint
+        run: npx --yes awesome-lint README.base.md
 
   structure:
     name: List structure check

@@ -32,6 +32,10 @@ TOC_ITEM_RE = re.compile(r"^\s*- \[(?P<title>[^\]]+)\]\(#(?P<anchor>[^)]+)\)\s*$
 # Sections whose bullet items are not resource entries.
 SKIP_SECTIONS = {"contents"}
 
+# Footer-style sections that awesome-lint does not want in the ToC;
+# they may be present in or absent from the Contents table.
+TOC_OPTIONAL = {"contributing", "related lists", "license", "footnotes"}
+
 
 def github_anchor(title: str) -> str:
     """Approximate GitHub's heading -> anchor slug algorithm."""
@@ -139,7 +143,7 @@ def main(path: Path) -> int:
         if anchor not in expected:
             problems.append(f"{lineno}: ToC entry '{title}' points to missing section #{anchor}")
     for lineno, title in headings:
-        if github_anchor(title) not in listed:
+        if github_anchor(title) not in listed and title.lower() not in TOC_OPTIONAL:
             problems.append(f"{lineno}: section '{title}' is missing from the Contents table")
 
     if not contents_seen:
