@@ -1,0 +1,27 @@
+name: Broken link
+description: Report a dead or wrong link in the list.
+title: "[Broken link]: "
+labels: ["broken-link"]
+body:
+  - type: input
+    id: entry
+    attributes:
+      label: Entry name
+      placeholder: e.g. DeepProbLog
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Broken URL
+    validations:
+      required: true
+  - type: input
+    id: replacement
+    attributes:
+      label: Suggested replacement URL (if known)
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Moved? Archived? Project dead (candidate for removal)?

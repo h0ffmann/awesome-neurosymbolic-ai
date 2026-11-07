@@ -1,0 +1,25 @@
+# Configuration for the lychee link checker (https://github.com/lycheeverse/lychee).
+
+# Be patient with slow academic hosts.
+timeout = 30
+max_retries = 3
+max_concurrency = 8
+
+# Status codes to accept as "alive".
+# 403/429: many publishers (IEEE, Elsevier, arXiv under load) rate-limit or
+# block CI user agents while serving browsers fine.
+accept = ["200..=299", "403", "429"]
+
+# Act like a browser; some publishers reject unknown clients outright.
+user_agent = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+
+# Check anchors in local markdown cross-references.
+include_fragments = true
+
+exclude = [
+  # Example/placeholder URLs used in contributing docs.
+  "^https?://example\\.com",
+]
+
+# Don't check mail addresses.
+exclude_all_private = true

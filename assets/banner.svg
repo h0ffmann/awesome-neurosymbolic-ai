@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="320" viewBox="0 0 1280 320" role="img" aria-label="Awesome Neurosymbolic AI">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1220"/>
+      <stop offset="1" stop-color="#1b2a4a"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4fd1c5"/>
+      <stop offset="1" stop-color="#b794f4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bg)"/>
+
+  <!-- left motif: neural graph -->
+  <g stroke="#4fd1c5" stroke-width="2" opacity="0.75" fill="none">
+    <line x1="90" y1="90" x2="190" y2="140"/>
+    <line x1="90" y1="160" x2="190" y2="140"/>
+    <line x1="90" y1="230" x2="190" y2="140"/>
+    <line x1="90" y1="160" x2="190" y2="210"/>
+    <line x1="90" y1="230" x2="190" y2="210"/>
+    <line x1="190" y1="140" x2="285" y2="175"/>
+    <line x1="190" y1="210" x2="285" y2="175"/>
+  </g>
+  <g fill="#4fd1c5">
+    <circle cx="90" cy="90" r="9"/>
+    <circle cx="90" cy="160" r="9"/>
+    <circle cx="90" cy="230" r="9"/>
+    <circle cx="190" cy="140" r="11"/>
+    <circle cx="190" cy="210" r="11"/>
+    <circle cx="285" cy="175" r="13"/>
+  </g>
+
+  <!-- bridge -->
+  <g stroke="url(#accent)" stroke-width="3" stroke-dasharray="2 9" stroke-linecap="round" fill="none" opacity="0.9">
+    <path d="M 300 175 C 350 130, 380 130, 430 158"/>
+    <path d="M 300 175 C 350 220, 380 220, 430 192"/>
+  </g>
+
+  <!-- right motif: logic glyphs -->
+  <g fill="#b794f4" font-family="Georgia, 'Times New Roman', serif" opacity="0.9">
+    <text x="455" y="140" font-size="46">&#8704;</text>
+    <text x="510" y="112" font-size="34" opacity="0.7">&#8743;</text>
+    <text x="455" y="225" font-size="46">&#8707;</text>
+    <text x="512" y="204" font-size="34" opacity="0.7">&#8594;</text>
+  </g>
+
+  <!-- title -->
+  <g font-family="-apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+    <text x="600" y="155" font-size="48" font-weight="700" fill="#f7fafc">Awesome Neurosymbolic AI</text>
+    <text x="602" y="200" font-size="22" fill="#a0aec0">neural learning &#215; symbolic reasoning</text>
+    <rect x="602" y="222" width="480" height="4" rx="2" fill="url(#accent)"/>
+  </g>
+</svg>
