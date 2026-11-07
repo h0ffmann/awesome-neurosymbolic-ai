@@ -33,6 +33,8 @@ W, H = 960.0, 240.0
 INK_LIGHT, INK_DARK = "#1f2328", "#e6edf3"
 SVG_PATH = Path("assets/banner.svg")
 JSON_PATH = Path("assets/banner.desmos.json")
+PNG_LIGHT = Path("assets/banner-light.png")
+PNG_DARK = Path("assets/banner-dark.png")
 
 Pt = tuple[float, float]
 Bezier = tuple[Pt, Pt, Pt, Pt]
@@ -186,13 +188,20 @@ def fmt3(v: float) -> str:
     return "+0.000" if s == "-0.000" else s
 
 
-def to_svg(pieces: list[tuple[Bezier, float]]) -> str:
+def to_svg(pieces: list[tuple[Bezier, float]], ink: str | None = None) -> str:
+    """The SVG. With no ink, one ink per color scheme; with one, that ink only."""
     alt = "A neural network flowing into the universal quantifier"
+    if ink is None:
+        style = (
+            "path{stroke:" + INK_LIGHT + ";fill:none;stroke-linecap:round}"
+            "@media (prefers-color-scheme:dark){path{stroke:" + INK_DARK + "}}"
+        )
+    else:
+        style = "path{stroke:" + ink + ";fill:none;stroke-linecap:round}"
     head = (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {fmt(W)} {fmt(H)}" '
         f'width="{fmt(W)}" height="{fmt(H)}" role="img" aria-label="{alt}">\n'
-        "<style>path{stroke:" + INK_LIGHT + ";fill:none;stroke-linecap:round}"
-        "@media (prefers-color-scheme:dark){path{stroke:" + INK_DARK + "}}</style>\n"
+        f"<style>{style}</style>\n"
     )
     body = []
     for (p0, p1, p2, p3), w in pieces:
@@ -211,6 +220,22 @@ def latex(b: Bezier) -> str:
     x = f"{xa:.3f}{fmt3(xb)}t{fmt3(xc)}t^{{2}}{fmt3(xd)}t^{{3}}"
     y = f"{ya:.3f}{fmt3(yb)}t{fmt3(yc)}t^{{2}}{fmt3(yd)}t^{{3}}"
     return f"\\left({x},{y}\\right)"
+
+
+def render_pngs(pieces: list[tuple[Bezier, float]]) -> None:
+    """The README renders committed PNGs (GitHub's image proxy caches SVGs too
+    aggressively); light and dark are the same geometry in each ink, at 2x.
+    PNGs are not byte-checked — rasterization varies across librsvg versions."""
+    import shutil
+    import subprocess
+
+    if not shutil.which("rsvg-convert"):
+        print("warn: rsvg-convert not found; PNGs not rendered.", file=sys.stderr)
+        return
+    for path, ink in ((PNG_LIGHT, INK_LIGHT), (PNG_DARK, INK_DARK)):
+        svg = to_svg(pieces, ink=ink).encode("utf-8")
+        subprocess.run(["rsvg-convert", "-w", "1920", "-o", str(path)], input=svg, check=True)
+        print(f"wrote {path}")
 
 
 def to_desmos(pieces: list[tuple[Bezier, float]]) -> str:
@@ -251,6 +276,10 @@ def check(pieces: list[tuple[Bezier, float]]) -> int:
         if not path.exists() or path.read_text(encoding="utf-8") != want:
             print(f"check: {path} is not the output of scripts/draw_banner.py — rerun it.")
             bad += 1
+    for png in (PNG_LIGHT, PNG_DARK):
+        if not png.exists():
+            print(f"check: {png} is missing — rerun scripts/draw_banner.py with rsvg-convert installed.")
+            bad += 1
 
     # Read the expressions back from their LaTeX and hold them to the geometry.
     worst = 0.0
@@ -288,6 +317,7 @@ def main() -> int:
     SVG_PATH.write_text(to_svg(pieces), encoding="utf-8")
     JSON_PATH.write_text(to_desmos(pieces), encoding="utf-8")
     print(f"wrote {SVG_PATH} and {JSON_PATH} — {len(pieces)} pieces.")
+    render_pngs(pieces)
     return 0
 
 

@@ -36,7 +36,7 @@ Entries follow the [awesome-lint](https://github.com/sindresorhus/awesome-lint) 
 
 ## How to submit
 
-> **Edit `README.base.md`, not `README.md`.** The readme is generated: a workflow rebuilds `README.md` from `README.base.md`, appending live metrics (stars, last commit, commits this year) to every GitHub entry. CI rejects pull requests that edit `README.md` directly. Don't add metrics yourself — the bot does it.
+> **Edit `README.base.md`, not `README.md`.** The readme is generated: a workflow rebuilds `README.md` from `README.base.md`, adding live metrics (stars, last commit, commits this year) to every GitHub entry — sections with more than five entries render as tables, smaller ones as bullets. CI rejects pull requests that edit `README.md` directly. Don't add metrics yourself — the bot does it. Your entry in `README.base.md` is always a plain bullet in the format below.
 
 1. Fork the repository and create a branch: `git checkout -b add-project-name`.
 2. Make your change **in `README.base.md`**. One entry (or one tightly related group of changes) per pull request.

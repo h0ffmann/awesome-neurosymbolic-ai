@@ -17,7 +17,7 @@ Internal notes on how this repository is set up and maintained. Contributors don
 
 ## README.base.md vs README.md
 
-`README.base.md` is the **source of truth** that humans edit. `README.md` is **generated** by `scripts/build_readme.py`, which appends live metrics to every entry whose primary link is a GitHub repository: `⭐ stars · last commit YYYY-MM-DD · N commits in <year>`. The Metrics workflow rebuilds it weekly and on every push to main that touches the base file; CI blocks PRs that edit `README.md` without `README.base.md`.
+`README.base.md` is the **source of truth** that humans edit, kept in canonical awesome-list form (awesome-lint runs against it). `README.md` is **generated** by `scripts/build_readme.py`, which adds live metrics to every entry whose primary link is a GitHub repository: a list block with more than five entries renders as a table with ⭐ Stars / Last commit / Commits in the current year columns, and smaller blocks stay bullets with `⭐ stars · last commit YYYY-MM-DD · N commits in <year>` appended. The Metrics workflow rebuilds it weekly and on every push to main that touches the base file; CI blocks PRs that edit `README.md` without `README.base.md`.
 
 | Workflow | Trigger | What it does |
 |---|---|---|

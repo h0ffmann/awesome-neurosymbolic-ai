@@ -1,18 +1,23 @@
 #!/usr/bin/env python3
-"""Build README.md from README.base.md, annotating GitHub entries with live metrics.
+"""Build README.md from README.base.md, with live GitHub metrics.
 
-For every list entry whose primary link is a GitHub repository, appends:
+- ``README.base.md`` is the file humans edit, in canonical awesome-list form
+  (checked by check_list.py and awesome-lint in CI).
+- ``README.md`` is generated. For every entry whose primary link is a GitHub
+  repository, metrics are fetched: stars, last default-branch commit date, and
+  commits in the current year. A list block with **more than five entries, at
+  least one of them a GitHub repository, renders as a table**; smaller blocks
+  stay bullets with the metrics appended:
 
-    ⭐ <stars> · last commit <YYYY-MM-DD> · <N> commits in <current year>
+      ⭐ <stars> · last commit <YYYY-MM-DD> · <N> commits in <year>
 
-- ``README.base.md`` is the file humans edit (checked by check_list.py and CI).
-- ``README.md`` is generated — by the Metrics workflow weekly and on pushes to
-  main that touch the base file. Never edit it by hand.
-- Entries whose metrics cannot be fetched (404, rate limit, network) are left
-  unannotated rather than failing the build.
+- Entries whose metrics cannot be fetched are left bare rather than failing
+  the build. A block with any line the parser does not recognize stays
+  bullets untouched.
 
 Usage:
     GITHUB_TOKEN=... python scripts/build_readme.py [README.base.md] [README.md]
+    python scripts/build_readme.py --metrics-tsv metrics.tsv   # offline metrics
 
 Stdlib only; no dependencies. The token is optional but strongly recommended
 (unauthenticated API calls are limited to 60/hour).
@@ -32,13 +37,12 @@ from pathlib import Path
 
 API = "https://api.github.com"
 YEAR = datetime.now(timezone.utc).year
+TABLE_OVER = 5  # a block with more entries than this becomes a table
 
-# Primary-link GitHub repo entries only: "- [Name](https://github.com/owner/repo) - Desc."
 ENTRY = re.compile(
-    r"^(?P<line>- \[[^\]]+\]"
-    r"\(https://github\.com/(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za-z0-9_.-]+)\)"
-    r" - .+\.)\s*$"
+    r"^- \[(?P<name>[^\]]+)\]\((?P<url>https?://[^)\s]+)\) - (?P<desc>.+\.)\s*$"
 )
+GH = re.compile(r"^https://github\.com/(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za-z0-9_.-]+)$")
 
 HEADER = """\
 <!--
@@ -48,9 +52,14 @@ HEADER = """\
 -->
 """
 
+Metrics = dict[str, object]  # {"stars": int, "last": str, "year": int | None}
+
+
+# ----------------------------------------------------------------------------
+# Metrics sources: GitHub API, or a pre-fetched TSV
+# ----------------------------------------------------------------------------
 
 def api_get(path: str, token: str | None) -> tuple[object, dict[str, str]] | None:
-    """GET a GitHub API path; return (parsed json, headers) or None on failure."""
     req = urllib.request.Request(API + path)
     req.add_header("Accept", "application/vnd.github+json")
     req.add_header("X-GitHub-Api-Version", "2022-11-28")
@@ -77,63 +86,105 @@ def api_get(path: str, token: str | None) -> tuple[object, dict[str, str]] | Non
 
 
 def last_page(headers: dict[str, str]) -> int | None:
-    """Extract the page count from a Link header, if paginated."""
-    link = headers.get("Link", "")
-    m = re.search(r'[?&]page=(\d+)[^>]*>;\s*rel="last"', link)
+    m = re.search(r'[?&]page=(\d+)[^>]*>;\s*rel="last"', headers.get("Link", ""))
     return int(m.group(1)) if m else None
 
 
-def repo_metrics(owner: str, repo: str, token: str | None) -> str | None:
-    """Return the annotation string for a repo, or None if unavailable."""
+def repo_metrics(owner: str, repo: str, token: str | None) -> Metrics | None:
     base = f"/repos/{owner}/{repo}"
-
     info = api_get(base, token)
-    if info is None or not isinstance(info[0], dict):
+    if info is None or not isinstance(info[0], dict) or "stargazers_count" not in info[0]:
         return None
-    stars = info[0].get("stargazers_count")
+    m: Metrics = {"stars": info[0]["stargazers_count"], "last": "", "year": None}
 
     head = api_get(f"{base}/commits?per_page=1", token)
-    last_commit = None
     if head and isinstance(head[0], list) and head[0]:
-        date = head[0][0].get("commit", {}).get("committer", {}).get("date", "")
-        last_commit = date[:10] or None
+        m["last"] = head[0][0].get("commit", {}).get("committer", {}).get("date", "")[:10]
 
     span = api_get(
         f"{base}/commits?since={YEAR}-01-01T00:00:00Z&until={YEAR + 1}-01-01T00:00:00Z&per_page=1",
         token,
     )
-    year_commits = None
     if span and isinstance(span[0], list):
-        year_commits = last_page(span[1])
-        if year_commits is None:
-            year_commits = len(span[0])
-
-    if stars is None:
-        return None
-    parts = [f"⭐ {stars:,}"]
-    if last_commit:
-        parts.append(f"last commit {last_commit}")
-    if year_commits is not None:
-        parts.append(f"{year_commits:,} commits in {YEAR}")
-    return " · ".join(parts) + "."
+        m["year"] = last_page(span[1])
+        if m["year"] is None:
+            m["year"] = len(span[0])
+    return m
 
 
-def load_tsv(path: Path) -> dict[tuple[str, str], str]:
-    """Pre-fetched metrics: lines of 'owner/repo<TAB>stars<TAB>last<TAB>year_commits'."""
-    table: dict[tuple[str, str], str] = {}
+def load_tsv(path: Path) -> dict[tuple[str, str], Metrics | None]:
+    """Pre-fetched metrics: lines of 'owner/repo<TAB>stars<TAB>last<TAB>year'."""
+    table: dict[tuple[str, str], Metrics | None] = {}
     for row in path.read_text(encoding="utf-8").splitlines():
         try:
-            full, stars, last, count = row.split("\t")
+            full, stars, last, year = row.split("\t")
             owner, repo = full.split("/")
-            parts = [f"⭐ {int(stars):,}"]
-            if last:
-                parts.append(f"last commit {last}")
-            if count:
-                parts.append(f"{int(count):,} commits in {YEAR}")
-            table[(owner, repo)] = " · ".join(parts) + "."
+            table[(owner, repo)] = {
+                "stars": int(stars),
+                "last": last,
+                "year": int(year) if year else None,
+            }
         except ValueError:
             continue
     return table
+
+
+# ----------------------------------------------------------------------------
+# Rendering
+# ----------------------------------------------------------------------------
+
+def suffix(m: Metrics) -> str:
+    parts = [f"⭐ {m['stars']:,}"]
+    if m["last"]:
+        parts.append(f"last commit {m['last']}")
+    if m["year"] is not None:
+        parts.append(f"{m['year']:,} commits in {YEAR}")
+    return " · ".join(parts) + "."
+
+
+def render_block(
+    block: list[str],
+    lookup,
+) -> tuple[list[str], int, int]:
+    """Render one consecutive list block; returns (lines, annotated, skipped)."""
+    parsed = []
+    for line in block:
+        e = ENTRY.match(line.strip())
+        if not e:
+            return block, 0, 0  # unknown shape: leave the whole block alone
+        g = GH.match(e.group("url"))
+        parsed.append((e, (g.group("owner"), g.group("repo")) if g else None))
+
+    annotated = skipped = 0
+    metrics: list[Metrics | None] = []
+    for e, key in parsed:
+        m = lookup(key) if key else None
+        metrics.append(m)
+        if key:
+            annotated += m is not None
+            skipped += m is None
+
+    if len(parsed) > TABLE_OVER and any(metrics):
+        rows = [
+            f"| Project | Description | ⭐ Stars | Last commit | Commits in {YEAR} |",
+            "|---|---|---:|---|---:|",
+        ]
+        for (e, key), m in zip(parsed, metrics):
+            name = f"[{e.group('name')}]({e.group('url')})"
+            desc = e.group("desc").replace("|", "\\|")
+            if m:
+                cells = [f"{m['stars']:,}", m["last"] or "—",
+                         f"{m['year']:,}" if m["year"] is not None else "—"]
+            else:
+                cells = ["—", "—", "—"]
+            rows.append(f"| {name} | {desc} | {cells[0]} | {cells[1]} | {cells[2]} |")
+        return rows, annotated, skipped
+
+    out = []
+    for (e, key), m in zip(parsed, metrics):
+        line = f"- [{e.group('name')}]({e.group('url')}) - {e.group('desc')}"
+        out.append(f"{line} {suffix(m)}" if m else line)
+    return out, annotated, skipped
 
 
 def main(src: Path, dst: Path, tsv: Path | None = None) -> int:
@@ -141,30 +192,38 @@ def main(src: Path, dst: Path, tsv: Path | None = None) -> int:
     if not token and not tsv:
         print("warn: no GITHUB_TOKEN/GH_TOKEN set; you will hit rate limits fast.", file=sys.stderr)
 
-    out_lines: list[str] = []
-    annotated = skipped = 0
-    cache: dict[tuple[str, str], str | None] = dict(load_tsv(tsv)) if tsv else {}
+    cache: dict[tuple[str, str], Metrics | None] = dict(load_tsv(tsv)) if tsv else {}
 
-    for line in src.read_text(encoding="utf-8").splitlines():
-        m = ENTRY.match(line)
-        if not m:
-            out_lines.append(line)
-            continue
-        key = (m.group("owner"), m.group("repo"))
+    def lookup(key: tuple[str, str]) -> Metrics | None:
         if key not in cache:
             cache[key] = repo_metrics(*key, token)
             time.sleep(0.2)
-        suffix = cache[key]
-        if suffix:
-            out_lines.append(f"{m.group('line')} {suffix}")
-            annotated += 1
-            print(f"  ok: {key[0]}/{key[1]}: {suffix}")
-        else:
-            out_lines.append(line)
-            skipped += 1
+        return cache[key]
 
-    dst.write_text(HEADER + "\n".join(out_lines) + "\n", encoding="utf-8")
-    print(f"build_readme: wrote {dst} — {annotated} entries annotated, {skipped} skipped.")
+    lines = src.read_text(encoding="utf-8").splitlines()
+    out: list[str] = []
+    annotated = skipped = 0
+    in_code = False
+    i = 0
+    while i < len(lines):
+        line = lines[i]
+        if line.strip().startswith("```"):
+            in_code = not in_code
+        if not in_code and ENTRY.match(line.strip()):
+            block = []
+            while i < len(lines) and ENTRY.match(lines[i].strip()):
+                block.append(lines[i])
+                i += 1
+            rendered, a, s = render_block(block, lookup)
+            out += rendered
+            annotated += a
+            skipped += s
+        else:
+            out.append(line)
+            i += 1
+
+    dst.write_text(HEADER + "\n".join(out) + "\n", encoding="utf-8")
+    print(f"build_readme: wrote {dst} — {annotated} entries with metrics, {skipped} without.")
     # Only fail if nothing at all could be fetched (likely auth/network problem).
     return 0 if annotated or not (annotated + skipped) else 1
 

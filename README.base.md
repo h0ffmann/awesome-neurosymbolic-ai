@@ -1,14 +1,27 @@
 <div align="center">
-	<img src="assets/banner.svg" alt="A neural network flowing into the universal quantifier, drawn from Desmos equations" width="100%">
-</div>
+
+<picture>
+	<source media="(prefers-color-scheme: dark)" srcset="assets/banner-dark.png">
+	<img alt="A neural network flowing into the universal quantifier, drawn from Desmos equations, by @h0ffmann" src="assets/banner-light.png" width="820">
+</picture>
 
 # Awesome Neurosymbolic AI [![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+
+<sub>∀ · <i>for all</i> · <a href="assets/README.md">the drawing</a> · <a href="assets/banner.desmos.json">its Desmos equations</a> · <a href="scripts/draw_banner.py">the pen</a> · <a href="#contents">contents</a> · <a href="contributing.md">contribute</a></sub>
+
+[![lint](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/lint.yml/badge.svg)](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/lint.yml)
+[![links](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/links.yml/badge.svg)](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/links.yml)
+[![metrics](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/stats.yml/badge.svg)](https://github.com/h0ffmann/awesome-neurosymbolic-ai/actions/workflows/stats.yml)
+[![license: CC0-1.0](https://img.shields.io/badge/license-CC0--1.0-6e40c9?style=flat-square)](license)
+[![stars](https://img.shields.io/github/stars/h0ffmann/awesome-neurosymbolic-ai?style=flat-square&color=6e40c9)](https://github.com/h0ffmann/awesome-neurosymbolic-ai/stargazers)
+
+</div>
 
 > Frameworks, reasoners, papers, courses, and benchmarks for neurosymbolic AI — systems that combine neural learning with symbolic reasoning.
 
 Neurosymbolic AI pairs the perception, flexibility, and scale of neural networks with the compositionality, data efficiency, interpretability, and formal guarantees of symbolic methods such as logic programming, constraint solving, theorem proving, and knowledge representation. This list covers both the integration layer (neurosymbolic frameworks proper) and the mature symbolic foundations those systems build on.
 
-Entries are curated: each one is maintained, documented, and useful in practice or foundational in the literature. See [contributing.md](contributing.md) before suggesting an addition.
+Entries are curated: each one is maintained, documented, and useful in practice or foundational in the literature. Read the contribution guidelines (linked at the bottom) before suggesting an addition.
 
 ## Contents
 
@@ -26,7 +39,6 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 - [Courses and Tutorials](#courses-and-tutorials)
 - [Benchmarks and Datasets](#benchmarks-and-datasets)
 - [Community](#community)
-- [Related Lists](#related-lists)
 - [Contributing](#contributing)
 
 ## Neurosymbolic Frameworks
