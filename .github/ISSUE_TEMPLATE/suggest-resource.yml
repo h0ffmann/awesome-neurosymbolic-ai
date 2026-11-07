@@ -1,0 +1,56 @@
+name: Suggest a resource
+description: Suggest something for the list without opening a pull request yourself.
+title: "[Suggestion]: "
+labels: ["suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! If you can, a pull request is even better — see [contributing.md](../../blob/main/contributing.md).
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: e.g. Scallop
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link
+      description: Canonical home of the project/paper (GitHub repo, arXiv page, project site).
+      placeholder: https://github.com/...
+    validations:
+      required: true
+  - type: dropdown
+    id: section
+    attributes:
+      label: Suggested section
+      options:
+        - Neurosymbolic Frameworks
+        - Symbolic Foundations
+        - LLMs and Symbolic Reasoning
+        - Papers
+        - Books
+        - Courses and Tutorials
+        - Benchmarks and Datasets
+        - Community
+        - Related Lists
+        - New section (explain below)
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why is it awesome?
+      description: One or two sentences. Maintained? Widely used or cited? What does it add over existing entries?
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched the list and existing issues/PRs — this is not a duplicate.
+          required: true
+        - label: I am affiliated with this project (self-nomination is fine, just disclose it).
