@@ -50,20 +50,20 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 
 Languages and libraries whose core purpose is integrating neural networks with symbolic reasoning.
 
-| Project | Description | ⭐ Stars | Last commit | Commits in 2026 |
-|---|---|---:|---|---:|
-| [Scallop](https://github.com/scallop-lang/scallop) | Neurosymbolic programming language based on Datalog, with differentiable reasoning built on provenance semirings and tunable reasoning granularity. | 525 | 2026-06-26 | 3 |
-| [DeepProbLog](https://github.com/ML-KULeuven/deepproblog) | Neural probabilistic logic programming that extends ProbLog with neural predicates, from KU Leuven. | 362 | 2026-09-29 | 9 |
-| [ABLkit](https://github.com/AbductiveLearning/ABLkit) | Toolkit for Abductive Learning, which bridges machine learning and logical abduction, from Nanjing University's LAMDA group. | 102 | 2026-10-25 | 40 |
-| [DomiKnowS](https://github.com/HLR/DomiKnowS) | Declarative Python/PyTorch framework for integrating logical domain knowledge as constraints into deep learning, with ILP-based inference. | 55 | 2026-09-04 | 406 |
-| [LTNtorch](https://github.com/tommasocarraro/LTNtorch) | PyTorch implementation of Logic Tensor Networks, which ground first-order fuzzy logic into tensor computations for learning with logical constraints. | 164 | 2024-10-02 | 0 |
-| [Logic Tensor Networks](https://github.com/logictensornetworks/logictensornetworks) | Original TensorFlow implementation of Logic Tensor Networks (Real Logic). | 376 | 2026-11-07 | 16 |
-| [LNN](https://github.com/IBM/LNN) | IBM's Logical Neural Networks, where every neuron represents a component of a weighted real-valued logic formula, supporting omnidirectional inference. | 337 | 2026-09-09 | 15 |
-| [NeurASP](https://github.com/azreasoners/NeurASP) | Embraces neural network outputs as probabilistic atom facts in Answer Set Programming. | 58 | 2026-10-12 | 7 |
-| [PSL](https://github.com/linqs/psl) | Probabilistic Soft Logic, a mature framework for probabilistic reasoning over relational domains using hinge-loss Markov random fields; basis of the NeuPSL neurosymbolic extension. | 315 | 2024-05-08 | 0 |
-| [PyNeuraLogic](https://github.com/LukasZahradnik/PyNeuraLogic) | Differentiable relational logic templates that generalize and extend graph neural networks. | 314 | 2026-10-22 | 101 |
-| [PyReason](https://github.com/lab-v2/pyreason) | Explainable reasoning over graphs with open-world annotated logic, supporting temporal reasoning. | 353 | 2026-10-26 | 220 |
-| [dPASP](https://github.com/kamel-usp/dpasp) | Differentiable probabilistic answer set programming framework for neurosymbolic inference and learning. | 32 | 2026-09-17 | 2 |
+| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in 2026 |
+|---|---|---:|---|---:|---|---:|
+| [Scallop](https://github.com/scallop-lang/scallop) | Neurosymbolic programming language based on Datalog, with differentiable reasoning built on provenance semirings and tunable reasoning granularity. | 525 | 2022-07 | 6 | 2026-06-26 | 3 |
+| [DeepProbLog](https://github.com/ML-KULeuven/deepproblog) | Neural probabilistic logic programming that extends ProbLog with neural predicates, from KU Leuven. | 362 | 2021-06 | 4 | 2026-09-29 | 9 |
+| [ABLkit](https://github.com/AbductiveLearning/ABLkit) | Toolkit for Abductive Learning, which bridges machine learning and logical abduction, from Nanjing University's LAMDA group. | 102 | 2022-02 | 6 | 2026-10-25 | 40 |
+| [DomiKnowS](https://github.com/HLR/DomiKnowS) | Declarative Python/PyTorch framework for integrating logical domain knowledge as constraints into deep learning, with ILP-based inference. | 55 | 2019-03 | 16 | 2026-09-04 | 406 |
+| [LTNtorch](https://github.com/tommasocarraro/LTNtorch) | PyTorch implementation of Logic Tensor Networks, which ground first-order fuzzy logic into tensor computations for learning with logical constraints. | 164 | 2021-11 | 1 | 2024-10-02 | 0 |
+| [Logic Tensor Networks](https://github.com/logictensornetworks/logictensornetworks) | Original TensorFlow implementation of Logic Tensor Networks (Real Logic). | 376 | 2018-07 | 5 | 2026-11-07 | 16 |
+| [LNN](https://github.com/IBM/LNN) | IBM's Logical Neural Networks, where every neuron represents a component of a weighted real-valued logic formula, supporting omnidirectional inference. | 337 | 2021-11 | 14 | 2026-09-09 | 15 |
+| [NeurASP](https://github.com/azreasoners/NeurASP) | Embraces neural network outputs as probabilistic atom facts in Answer Set Programming. | 58 | 2020-02 | 3 | 2026-11-08 | 8 |
+| [PSL](https://github.com/linqs/psl) | Probabilistic Soft Logic, a mature framework for probabilistic reasoning over relational domains using hinge-loss Markov random fields; basis of the NeuPSL neurosymbolic extension. | 315 | 2011-07 | 20 | 2024-05-08 | 0 |
+| [PyNeuraLogic](https://github.com/LukasZahradnik/PyNeuraLogic) | Differentiable relational logic templates that generalize and extend graph neural networks. | 314 | 2020-12 | 3 | 2026-10-22 | 101 |
+| [PyReason](https://github.com/lab-v2/pyreason) | Explainable reasoning over graphs with open-world annotated logic, supporting temporal reasoning. | 354 | 2022-10 | 14 | 2026-10-26 | 220 |
+| [dPASP](https://github.com/kamel-usp/dpasp) | Differentiable probabilistic answer set programming framework for neurosymbolic inference and learning. | 32 | 2022-06 | 2 | 2026-09-17 | 2 |
 
 ## Symbolic Foundations
 
@@ -71,60 +71,60 @@ Mature, production-grade symbolic engines. These are the reasoning backbones tha
 
 ### Solvers and Provers
 
-| Project | Description | ⭐ Stars | Last commit | Commits in 2026 |
-|---|---|---:|---|---:|
-| [Z3](https://github.com/Z3Prover/z3) | Microsoft Research's SMT solver, the workhorse of program verification, symbolic execution, and constraint solving. | 12,896 | 2026-11-07 | 3,070 |
-| [cvc5](https://github.com/cvc5/cvc5) | Industrial-strength open-source SMT solver with strong theory support and proof production. | 1,388 | 2026-11-05 | 585 |
-| [Kissat](https://github.com/arminbiere/kissat) | State-of-the-art SAT solver by Armin Biere, a reference implementation in modern CDCL solving. | 685 | 2025-10-16 | 0 |
-| [Vampire](https://github.com/vprover/vampire) | Award-winning automated theorem prover for first-order logic. | 449 | 2026-11-06 | 881 |
-| [E Prover](https://github.com/eprover/eprover) | High-performance theorem prover for full first-order logic with equality. | 174 | 2026-11-04 | 163 |
-| [Lean 4](https://github.com/leanprover/lean4) | Interactive theorem prover and dependently-typed programming language, with the community-maintained [Mathlib](https://github.com/leanprover-community/mathlib4) mathematical library. | 9,908 | 2026-11-07 | 2,910 |
-| [Isabelle](https://isabelle.in.tum.de) | Generic proof assistant with the large Archive of Formal Proofs ecosystem. | — | — | — |
-| [Rocq](https://rocq-prover.org) | Interactive theorem prover based on the calculus of inductive constructions, formerly known as Coq. | — | — | — |
-| [OR-Tools](https://github.com/google/or-tools) | Google's operations research suite, including the award-winning CP-SAT constraint programming solver. | 14,343 | 2026-09-17 | 41 |
-| [MiniZinc](https://www.minizinc.org) | Solver-independent constraint modeling language, the lingua franca of constraint programming. | — | — | — |
+| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in 2026 |
+|---|---|---:|---|---:|---|---:|
+| [Z3](https://github.com/Z3Prover/z3) | Microsoft Research's SMT solver, the workhorse of program verification, symbolic execution, and constraint solving. | 12,902 | 2015-03 | 351 | 2026-11-08 | 3,073 |
+| [cvc5](https://github.com/cvc5/cvc5) | Industrial-strength open-source SMT solver with strong theory support and proof production. | 1,389 | 2012-12 | 103 | 2026-11-05 | 585 |
+| [Kissat](https://github.com/arminbiere/kissat) | State-of-the-art SAT solver by Armin Biere, a reference implementation in modern CDCL solving. | 685 | 2020-05 | 3 | 2025-10-16 | 0 |
+| [Vampire](https://github.com/vprover/vampire) | Award-winning automated theorem prover for first-order logic. | 449 | 2014-03 | 35 | 2026-11-06 | 881 |
+| [E Prover](https://github.com/eprover/eprover) | High-performance theorem prover for full first-order logic with equality. | 174 | 2016-11 | 10 | 2026-11-08 | 176 |
+| [Lean 4](https://github.com/leanprover/lean4) | Interactive theorem prover and dependently-typed programming language, with the community-maintained [Mathlib](https://github.com/leanprover-community/mathlib4) mathematical library. | 9,918 | 2018-04 | 295 | 2026-11-07 | 2,912 |
+| [Isabelle](https://isabelle.in.tum.de) | Generic proof assistant with the large Archive of Formal Proofs ecosystem. | — | — | — | — | — |
+| [Rocq](https://rocq-prover.org) | Interactive theorem prover based on the calculus of inductive constructions, formerly known as Coq. | — | — | — | — | — |
+| [OR-Tools](https://github.com/google/or-tools) | Google's operations research suite, including the award-winning CP-SAT constraint programming solver. | 14,346 | 2015-02 | 149 | 2026-09-17 | 41 |
+| [MiniZinc](https://www.minizinc.org) | Solver-independent constraint modeling language, the lingua franca of constraint programming. | — | — | — | — | — |
 
 ### Logic Programming
 
-| Project | Description | ⭐ Stars | Last commit | Commits in 2026 |
-|---|---|---:|---|---:|
-| [SWI-Prolog](https://www.swi-prolog.org) | The most widely used open-source Prolog system, actively maintained for decades. | — | — | — |
-| [Scryer Prolog](https://github.com/mthom/scryer-prolog) | Modern ISO-conforming Prolog implemented in Rust. | 2,470 | 2026-10-22 | 287 |
-| [Clingo](https://github.com/potassco/clingo) | The standard Answer Set Programming system from the Potassco project. | 859 | 2026-11-03 | 44 |
-| [ProbLog](https://github.com/ML-KULeuven/problog) | Probabilistic logic programming language and engine, the symbolic substrate of DeepProbLog. | 430 | 2026-09-14 | 52 |
-| [Soufflé](https://github.com/souffle-lang/souffle) | High-performance Datalog engine that compiles to parallel C++, used in static analysis at scale. | 1,193 | 2026-10-31 | 21 |
-| [miniKanren](https://minikanren.org) | Family of embeddable relational programming languages with implementations in dozens of host languages. | — | — | — |
+| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in 2026 |
+|---|---|---:|---|---:|---|---:|
+| [SWI-Prolog](https://www.swi-prolog.org) | The most widely used open-source Prolog system, actively maintained for decades. | — | — | — | — | — |
+| [Scryer Prolog](https://github.com/mthom/scryer-prolog) | Modern ISO-conforming Prolog implemented in Rust. | 2,470 | 2016-10 | 56 | 2026-10-22 | 287 |
+| [Clingo](https://github.com/potassco/clingo) | The standard Answer Set Programming system from the Potassco project. | 860 | 2016-05 | 22 | 2026-11-03 | 44 |
+| [ProbLog](https://github.com/ML-KULeuven/problog) | Probabilistic logic programming language and engine, the symbolic substrate of DeepProbLog. | 430 | 2019-05 | 17 | 2026-09-14 | 52 |
+| [Soufflé](https://github.com/souffle-lang/souffle) | High-performance Datalog engine that compiles to parallel C++, used in static analysis at scale. | 1,194 | 2016-03 | 99 | 2026-10-31 | 21 |
+| [miniKanren](https://minikanren.org) | Family of embeddable relational programming languages with implementations in dozens of host languages. | — | — | — | — | — |
 
 ### Knowledge Representation
 
-| Project | Description | ⭐ Stars | Last commit | Commits in 2026 |
-|---|---|---:|---|---:|
-| [Protégé](https://github.com/protegeproject/protege) | The standard open-source ontology editor for OWL, from Stanford. | 1,634 | 2026-09-23 | 30 |
-| [ELK](https://github.com/liveontologies/elk-reasoner) | Very fast OWL EL reasoner used with large biomedical ontologies such as SNOMED CT. | 129 | 2024-07-11 | 0 |
-| [Apache Jena](https://jena.apache.org) | Java framework for building Semantic Web and linked data applications with RDF, SPARQL, and OWL. | — | — | — |
-| [RDFLib](https://github.com/RDFLib/rdflib) | Pure-Python library for working with RDF, SPARQL, and serialization formats. | 2,548 | 2026-11-02 | 128 |
-| [OWL API](https://github.com/owlcs/owlapi) | Reference Java API for creating and manipulating OWL ontologies. | 945 | 2026-11-02 | 8 |
-| [mOWL](https://github.com/bio-ontology-research-group/mowl) | Python library for machine learning with ontologies, embedding OWL knowledge into vector spaces. | 97 | 2026-09-10 | 100 |
+| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in 2026 |
+|---|---|---:|---|---:|---|---:|
+| [Protégé](https://github.com/protegeproject/protege) | The standard open-source ontology editor for OWL, from Stanford. | 1,635 | 2013-08 | 38 | 2026-09-23 | 30 |
+| [ELK](https://github.com/liveontologies/elk-reasoner) | Very fast OWL EL reasoner used with large biomedical ontologies such as SNOMED CT. | 129 | 2015-10 | 9 | 2024-07-11 | 0 |
+| [Apache Jena](https://jena.apache.org) | Java framework for building Semantic Web and linked data applications with RDF, SPARQL, and OWL. | — | — | — | — | — |
+| [RDFLib](https://github.com/RDFLib/rdflib) | Pure-Python library for working with RDF, SPARQL, and serialization formats. | 2,550 | 2012-02 | 203 | 2026-11-02 | 128 |
+| [OWL API](https://github.com/owlcs/owlapi) | Reference Java API for creating and manipulating OWL ontologies. | 945 | 2013-02 | 34 | 2026-11-02 | 8 |
+| [mOWL](https://github.com/bio-ontology-research-group/mowl) | Python library for machine learning with ontologies, embedding OWL knowledge into vector spaces. | 97 | 2020-03 | 11 | 2026-09-10 | 100 |
 
 ### Planning
 
-- [Fast Downward](https://github.com/aibasel/downward) - The reference classical planning system built on heuristic search. ⭐ 410 · last commit 2026-10-29 · 57 commits in 2026.
-- [Unified Planning](https://github.com/aiplan4eu/unified-planning) - Python API providing a single interface to many planning engines, from the AIPlan4EU project. ⭐ 330 · last commit 2026-11-02 · 761 commits in 2026.
+- [Fast Downward](https://github.com/aibasel/downward) - The reference classical planning system built on heuristic search. ⭐ 410 · created 2019-06 · 26 contributors · last commit 2026-10-29 · 57 commits in 2026.
+- [Unified Planning](https://github.com/aiplan4eu/unified-planning) - Python API providing a single interface to many planning engines, from the AIPlan4EU project. ⭐ 330 · created 2021-03 · 39 contributors · last commit 2026-11-02 · 761 commits in 2026.
 - [Planning.wiki](https://planning.wiki) - Community guide to PDDL and automated planning tools.
 
 ## LLMs and Symbolic Reasoning
 
 Where most practical adoption is happening today: pairing large language models with symbolic engines that check, constrain, or execute their outputs.
 
-| Project | Description | ⭐ Stars | Last commit | Commits in 2026 |
-|---|---|---:|---|---:|
-| [SynaLinks](https://github.com/SynaLinks/synalinks) | Keras-inspired framework for building neurosymbolic language-model applications with knowledge graphs and constrained structured output. | 464 | 2026-11-07 | 425 |
-| [SymbolicAI](https://github.com/ExtensityAI/symbolicai) | Compositional differentiable programming library that treats LLMs as semantic parsers embedded in a symbolic framework. | 1,780 | 2026-10-22 | 251 |
-| [LeanDojo](https://github.com/lean-dojo/LeanDojo) | Open toolkit for interacting with Lean, including retrieval-augmented LLM-based theorem proving. | 852 | 2026-01-18 | 1 |
-| [AlphaGeometry](https://github.com/google-deepmind/alphageometry) | DeepMind's neurosymbolic system combining a language model with a symbolic deduction engine, reaching olympiad-level geometry. | 4,904 | 2026-01-05 | 1 |
-| [Outlines](https://github.com/dottxt-ai/outlines) | Constrained text generation that guarantees LLM outputs conform to regular expressions, grammars, or JSON schemas via finite-state machines. | 16,005 | 2026-08-24 | 164 |
-| [Guidance](https://github.com/guidance-ai/guidance) | Programming paradigm for steering LLMs with grammars, regular expressions, and control flow, with guaranteed output structure. | 21,821 | 2026-05-21 | 25 |
-| [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models. | 771 | 2026-11-07 | 421 |
+| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in 2026 |
+|---|---|---:|---|---:|---|---:|
+| [SynaLinks](https://github.com/SynaLinks/synalinks) | Keras-inspired framework for building neurosymbolic language-model applications with knowledge graphs and constrained structured output. | 464 | 2025-02 | 10 | 2026-11-07 | 425 |
+| [SymbolicAI](https://github.com/ExtensityAI/symbolicai) | Compositional differentiable programming library that treats LLMs as semantic parsers embedded in a symbolic framework. | 1,780 | 2022-11 | 14 | 2026-10-22 | 251 |
+| [LeanDojo](https://github.com/lean-dojo/LeanDojo) | Open toolkit for interacting with Lean, including retrieval-augmented LLM-based theorem proving. | 852 | 2023-06 | 18 | 2026-01-18 | 1 |
+| [AlphaGeometry](https://github.com/google-deepmind/alphageometry) | DeepMind's neurosymbolic system combining a language model with a symbolic deduction engine, reaching olympiad-level geometry. | 4,903 | 2023-10 | 1 | 2026-01-05 | 1 |
+| [Outlines](https://github.com/dottxt-ai/outlines) | Constrained text generation that guarantees LLM outputs conform to regular expressions, grammars, or JSON schemas via finite-state machines. | 16,008 | 2023-03 | 179 | 2026-08-24 | 164 |
+| [Guidance](https://github.com/guidance-ai/guidance) | Programming paradigm for steering LLMs with grammars, regular expressions, and control flow, with guaranteed output structure. | 21,823 | 2022-11 | 79 | 2026-05-21 | 25 |
+| [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models. | 771 | 2021-07 | 5 | 2026-11-08 | 454 |
 
 ## Papers
 
@@ -161,10 +161,10 @@ Where most practical adoption is happening today: pairing large language models 
 
 ## Benchmarks and Datasets
 
-- [CLEVR](https://github.com/facebookresearch/clevr-dataset-gen) - Diagnostic dataset for compositional visual reasoning, the classic testbed for neurosymbolic VQA. ⭐ 653 · last commit 2019-03-22 · 0 commits in 2026.
-- [FOLIO](https://github.com/Yale-LILY/FOLIO) - First-order logic reasoning benchmark with natural language annotated by logicians. ⭐ 148 · last commit 2023-12-22 · 0 commits in 2026.
+- [CLEVR](https://github.com/facebookresearch/clevr-dataset-gen) - Diagnostic dataset for compositional visual reasoning, the classic testbed for neurosymbolic VQA. ⭐ 653 · created 2017-07 · 1 contributors · last commit 2019-03-22 · 0 commits in 2026.
+- [FOLIO](https://github.com/Yale-LILY/FOLIO) - First-order logic reasoning benchmark with natural language annotated by logicians. ⭐ 148 · created 2022-09 · 1 contributors · last commit 2023-12-22 · 0 commits in 2026.
 - [ProofWriter](https://allenai.org/data/proofwriter) - Datasets of entailment trees for rule-based reasoning over natural language from AI2.
-- [ARC-AGI](https://github.com/fchollet/ARC-AGI) - Chollet's Abstraction and Reasoning Corpus, a benchmark of core-knowledge program induction tasks. ⭐ 4,856 · last commit 2025-04-04 · 0 commits in 2026.
+- [ARC-AGI](https://github.com/fchollet/ARC-AGI) - Chollet's Abstraction and Reasoning Corpus, a benchmark of core-knowledge program induction tasks. ⭐ 4,857 · created 2019-11 · 21 contributors · last commit 2025-04-04 · 0 commits in 2026.
 - [rsbench](https://unitn-sml.github.io/rsbench) - Suite for systematically evaluating reasoning shortcuts in neurosymbolic models.
 
 ## Community
@@ -174,9 +174,9 @@ Where most practical adoption is happening today: pairing large language models 
 
 ## Related Lists
 
-- [Awesome LLM Reasoning with NeSy](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy) - Paper-centric list on neurosymbolic learning in the LLM era, from the LAMDA NeSy group. ⭐ 335 · last commit 2025-06-19 · 0 commits in 2026.
-- [Awesome Neurosymbolic AI (benchmarks)](https://github.com/sciknoworg/awesome-neurosymbolic-ai) - Catalog of benchmarks, datasets, and evaluation resources. ⭐ 7 · last commit 2026-06-17 · 9 commits in 2026.
-- [Awesome Neurosymbolic Computer Vision](https://github.com/marcionicolau/awesome-neurosymbolic-cv) - Companion list to a neurosymbolic computer vision survey. ⭐ 0 · last commit 2024-01-10 · 0 commits in 2026.
+- [Awesome LLM Reasoning with NeSy](https://github.com/LAMDA-NeSy/Awesome-LLM-Reasoning-with-NeSy) - Paper-centric list on neurosymbolic learning in the LLM era, from the LAMDA NeSy group. ⭐ 334 · created 2024-10 · 1 contributors · last commit 2025-06-19 · 0 commits in 2026.
+- [Awesome Neurosymbolic AI (benchmarks)](https://github.com/sciknoworg/awesome-neurosymbolic-ai) - Catalog of benchmarks, datasets, and evaluation resources. ⭐ 7 · created 2026-06 · 0 contributors · last commit 2026-06-17 · 9 commits in 2026.
+- [Awesome Neurosymbolic Computer Vision](https://github.com/marcionicolau/awesome-neurosymbolic-cv) - Companion list to a neurosymbolic computer vision survey. ⭐ 0 · created 2024-01 · 1 contributors · last commit 2024-01-10 · 0 commits in 2026.
 - [NeSymGraphs](https://github.com/NeSymGraphs) - GitHub organization collecting implementations from a survey on neurosymbolic reasoning over knowledge graphs.
 
 ## Contributing
