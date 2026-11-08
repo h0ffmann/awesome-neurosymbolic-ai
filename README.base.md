@@ -113,6 +113,10 @@ Where most practical adoption is happening today: pairing large language models 
 
 ## Papers
 
+> [!TIP]
+> **📌 Curated pick:** [Neuro-Symbolic Frameworks: Conceptual Characterization and Empirical Comparative Analysis](https://neurosymbolic-ai-journal.com/system/files/nai-paper-924_0.pdf) (Sinha, Premsri, Kamali and Kordjamshidi — Neurosymbolic Artificial Intelligence journal, 2026).
+> A conceptual characterization and head-to-head empirical comparison of NeSy frameworks, including DomiKnowS, DeepProbLog, and Scallop — the best single read before choosing a framework from this list.
+
 ### Surveys
 
 - [Neurosymbolic AI: The 3rd Wave](https://arxiv.org/abs/2012.05876) - Garcez and Lamb's influential position paper framing the modern neurosymbolic agenda (2020).
@@ -120,7 +124,6 @@ Where most practical adoption is happening today: pairing large language models 
 - [From Statistical Relational to Neurosymbolic Artificial Intelligence: A Survey](https://arxiv.org/abs/2108.11451) - Marra et al. connect neurosymbolic AI to its statistical relational learning roots (2021).
 - [Neuro-Symbolic AI and Its Taxonomy: A Survey](https://arxiv.org/abs/2305.08876) - Systematic taxonomy of integration patterns (2023).
 - [Survey on Applications of Neurosymbolic Artificial Intelligence](https://arxiv.org/abs/2209.12618) - Application-focused view of the field (2022).
-- [Neuro-Symbolic Frameworks: Conceptual Characterization and Empirical Comparative Analysis](https://neurosymbolic-ai-journal.com/system/files/nai-paper-924_0.pdf) - 2026 empirical comparison of DomiKnowS, DeepProbLog, and Scallop in the Neurosymbolic AI journal.
 - [Neurosymbolic AI for Reasoning Over Knowledge Graphs: A Survey](https://doi.org/10.1109/TNNLS.2024.3420218) - DeLong, Mir, and Fleuriot's IEEE TNNLS survey of neurosymbolic reasoning on graphs (2024).
 - [Neurosymbolic Programming](https://www.nowpublishers.com/article/Details/PGL-049) - Chaudhuri et al.'s Foundations and Trends monograph treating neurosymbolic systems as a programming languages problem (2021).
 
