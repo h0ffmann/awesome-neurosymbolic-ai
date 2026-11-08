@@ -221,6 +221,35 @@ def render_block(
     return out, annotated, skipped
 
 
+RANKINGS_MARKER = "<!-- rankings -->"
+SYMBOLIC_SECTIONS = {"solvers and provers", "logic programming", "knowledge representation", "planning"}
+NEURO_SECTIONS = {"neurosymbolic frameworks", "llms and symbolic reasoning"}
+TOP_N = 10
+
+
+def render_rankings(ranked, lookup) -> list[str]:
+    """Two Top-N tables, ranked by live stars, from the list's own entries."""
+    out: list[str] = []
+    for title, sections in (
+        (f"Top {TOP_N} neurosymbolic AI repositories", NEURO_SECTIONS),
+        (f"Top {TOP_N} symbolic AI repositories", SYMBOLIC_SECTIONS),
+    ):
+        rows = [
+            (e, m) for e, section, m in ranked
+            if section in sections and m is not None
+        ]
+        rows.sort(key=lambda r: r[1]["stars"], reverse=True)
+        out += ["", f"### {title}", ""]
+        out.append("| # | Repository | ⭐ Stars | Created | Last commit |")
+        out.append("|---:|---|---:|---|---|")
+        for n, (e, m) in enumerate(rows[:TOP_N], start=1):
+            out.append(
+                f"| {n} | [{e.group('name')}]({e.group('url')}) | {m['stars']:,} "
+                f"| {str(m.get('created') or '—')[:7]} | {m['last'] or '—'} |"
+            )
+    return out[1:]  # drop the leading blank line
+
+
 def main(src: Path, dst: Path, tsv: Path | None = None) -> int:
     token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
     if not token and not tsv:
@@ -235,6 +264,29 @@ def main(src: Path, dst: Path, tsv: Path | None = None) -> int:
         return cache[key]
 
     lines = src.read_text(encoding="utf-8").splitlines()
+
+    # Pass 1: collect every GitHub entry with its section, fetching metrics.
+    ranked = []
+    section = ""
+    in_code = False
+    for line in lines:
+        if line.strip().startswith("```"):
+            in_code = not in_code
+            continue
+        if in_code:
+            continue
+        h = re.match(r"^#{2,3} (.+?)\s*$", line)
+        if h:
+            section = h.group(1).strip().lower()
+            continue
+        e = ENTRY.match(line.strip())
+        if e:
+            g = GH.match(e.group("url"))
+            if g:
+                key = (g.group("owner"), g.group("repo"))
+                ranked.append((e, section, lookup(key)))
+
+    # Pass 2: emit, rendering blocks and the rankings marker.
     out: list[str] = []
     annotated = skipped = 0
     in_code = False
@@ -243,6 +295,10 @@ def main(src: Path, dst: Path, tsv: Path | None = None) -> int:
         line = lines[i]
         if line.strip().startswith("```"):
             in_code = not in_code
+        if not in_code and line.strip() == RANKINGS_MARKER:
+            out += render_rankings(ranked, lookup)
+            i += 1
+            continue
         if not in_code and ENTRY.match(line.strip()):
             block = []
             while i < len(lines) and ENTRY.match(lines[i].strip()):

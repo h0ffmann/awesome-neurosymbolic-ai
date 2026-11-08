@@ -25,6 +25,7 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 
 ## Contents
 
+- [Rankings](#rankings)
 - [Neurosymbolic Frameworks](#neurosymbolic-frameworks)
 - [Symbolic Foundations](#symbolic-foundations)
 	- [Solvers and Provers](#solvers-and-provers)
@@ -40,6 +41,12 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 - [Benchmarks and Datasets](#benchmarks-and-datasets)
 - [Community](#community)
 - [Contributing](#contributing)
+
+## Rankings
+
+Generated from the list's own entries and their live metrics: the ten most starred repositories on each side of the neural–symbolic bridge, refreshed weekly.
+
+<!-- rankings -->
 
 ## Neurosymbolic Frameworks
 
@@ -120,6 +127,7 @@ Where most practical adoption is happening today: pairing large language models 
 ### Surveys
 
 - [Neurosymbolic AI: The 3rd Wave](https://arxiv.org/abs/2012.05876) - Garcez and Lamb's influential position paper framing the modern neurosymbolic agenda (2020).
+- [The Next Decade in AI: Four Steps Towards Robust Artificial Intelligence](https://arxiv.org/abs/2002.06177) - Gary Marcus's hybrid-AI manifesto: robust AI needs hybrid neurosymbolic architectures, large-scale knowledge, explicit reasoning, and cognitive models (2020).
 - [Neurosymbolic AI — Why, What, and How](https://arxiv.org/abs/2305.00813) - Concise introduction by Sheth, Roy, and Gaur (2023).
 - [From Statistical Relational to Neurosymbolic Artificial Intelligence: A Survey](https://arxiv.org/abs/2108.11451) - Marra et al. connect neurosymbolic AI to its statistical relational learning roots (2021).
 - [Neuro-Symbolic AI and Its Taxonomy: A Survey](https://arxiv.org/abs/2305.08876) - Systematic taxonomy of integration patterns (2023).
