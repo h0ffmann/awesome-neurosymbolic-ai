@@ -4,12 +4,14 @@
 - ``README.base.md`` is the file humans edit, in canonical awesome-list form
   (checked by check_list.py and awesome-lint in CI).
 - ``README.md`` is generated. For every entry whose primary link is a GitHub
-  repository, metrics are fetched: stars, last default-branch commit date, and
-  commits in the current year. A list block with **more than five entries, at
-  least one of them a GitHub repository, renders as a table**; smaller blocks
-  stay bullets with the metrics appended:
+  repository, metrics are fetched: stars, creation date, number of
+  contributors, last default-branch commit date, and commits in the current
+  year. A list block with **more than five entries, at least one of them a
+  GitHub repository, renders as a table**; smaller blocks stay bullets with
+  the metrics appended:
 
-      ⭐ <stars> · last commit <YYYY-MM-DD> · <N> commits in <year>
+      ⭐ <stars> · created <YYYY-MM> · <N> contributors ·
+      last commit <YYYY-MM-DD> · <N> commits in <year>
 
 - Entries whose metrics cannot be fetched are left bare rather than failing
   the build. A block with any line the parser does not recognize stays
@@ -52,7 +54,9 @@ HEADER = """\
 -->
 """
 
-Metrics = dict[str, object]  # {"stars": int, "last": str, "year": int | None}
+# {"stars": int, "created": str, "contributors": int | None,
+#  "last": str, "year": int | None}
+Metrics = dict[str, object]
 
 
 # ----------------------------------------------------------------------------
@@ -95,7 +99,22 @@ def repo_metrics(owner: str, repo: str, token: str | None) -> Metrics | None:
     info = api_get(base, token)
     if info is None or not isinstance(info[0], dict) or "stargazers_count" not in info[0]:
         return None
-    m: Metrics = {"stars": info[0]["stargazers_count"], "last": "", "year": None}
+    m: Metrics = {
+        "stars": info[0]["stargazers_count"],
+        "created": (info[0].get("created_at") or "")[:10],
+        "contributors": None,
+        "last": "",
+        "year": None,
+    }
+
+    # Contributor count via the Link-header trick: one item per page, the
+    # last page number is the count. None (e.g. the list is too large for
+    # the API, or the call failed) renders as an em dash.
+    contrib = api_get(f"{base}/contributors?per_page=1", token)
+    if contrib and isinstance(contrib[0], list):
+        m["contributors"] = last_page(contrib[1])
+        if m["contributors"] is None:
+            m["contributors"] = len(contrib[0])
 
     head = api_get(f"{base}/commits?per_page=1", token)
     if head and isinstance(head[0], list) and head[0]:
@@ -113,18 +132,24 @@ def repo_metrics(owner: str, repo: str, token: str | None) -> Metrics | None:
 
 
 def load_tsv(path: Path) -> dict[tuple[str, str], Metrics | None]:
-    """Pre-fetched metrics: lines of 'owner/repo<TAB>stars<TAB>last<TAB>year'."""
+    """Pre-fetched metrics: 'owner/repo<TAB>stars<TAB>last<TAB>year<TAB>created<TAB>contributors'
+    (the last two columns may be absent or empty)."""
     table: dict[tuple[str, str], Metrics | None] = {}
     for row in path.read_text(encoding="utf-8").splitlines():
+        cols = row.split("\t")
         try:
-            full, stars, last, year = row.split("\t")
+            full, stars, last, year = cols[0], cols[1], cols[2], cols[3]
+            created = cols[4] if len(cols) > 4 else ""
+            contributors = cols[5] if len(cols) > 5 else ""
             owner, repo = full.split("/")
             table[(owner, repo)] = {
                 "stars": int(stars),
+                "created": created,
+                "contributors": int(contributors) if contributors else None,
                 "last": last,
                 "year": int(year) if year else None,
             }
-        except ValueError:
+        except (ValueError, IndexError):
             continue
     return table
 
@@ -135,6 +160,10 @@ def load_tsv(path: Path) -> dict[tuple[str, str], Metrics | None]:
 
 def suffix(m: Metrics) -> str:
     parts = [f"⭐ {m['stars']:,}"]
+    if m.get("created"):
+        parts.append(f"created {str(m['created'])[:7]}")
+    if m.get("contributors") is not None:
+        parts.append(f"{m['contributors']:,} contributors")
     if m["last"]:
         parts.append(f"last commit {m['last']}")
     if m["year"] is not None:
@@ -166,18 +195,23 @@ def render_block(
 
     if len(parsed) > TABLE_OVER and any(metrics):
         rows = [
-            f"| Project | Description | ⭐ Stars | Last commit | Commits in {YEAR} |",
-            "|---|---|---:|---|---:|",
+            f"| Project | Description | ⭐ Stars | Created | Contributors | Last commit | Commits in {YEAR} |",
+            "|---|---|---:|---|---:|---|---:|",
         ]
         for (e, key), m in zip(parsed, metrics):
             name = f"[{e.group('name')}]({e.group('url')})"
             desc = e.group("desc").replace("|", "\\|")
             if m:
-                cells = [f"{m['stars']:,}", m["last"] or "—",
-                         f"{m['year']:,}" if m["year"] is not None else "—"]
+                cells = [
+                    f"{m['stars']:,}",
+                    str(m.get("created") or "—")[:7],
+                    f"{m['contributors']:,}" if m.get("contributors") is not None else "—",
+                    m["last"] or "—",
+                    f"{m['year']:,}" if m["year"] is not None else "—",
+                ]
             else:
-                cells = ["—", "—", "—"]
-            rows.append(f"| {name} | {desc} | {cells[0]} | {cells[1]} | {cells[2]} |")
+                cells = ["—"] * 5
+            rows.append(f"| {name} | {desc} | " + " | ".join(cells) + " |")
         return rows, annotated, skipped
 
     out = []
