@@ -30,6 +30,7 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 
 ## Contents
 
+- [Rankings](#rankings)
 - [Neurosymbolic Frameworks](#neurosymbolic-frameworks)
 - [Symbolic Foundations](#symbolic-foundations)
 	- [Solvers and Provers](#solvers-and-provers)
@@ -45,6 +46,40 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 - [Benchmarks and Datasets](#benchmarks-and-datasets)
 - [Community](#community)
 - [Contributing](#contributing)
+
+## Rankings
+
+Generated from the list's own entries and their live metrics: the ten most starred repositories on each side of the neural–symbolic bridge, refreshed weekly.
+
+### Top 10 neurosymbolic AI repositories
+
+| # | Repository | ⭐ Stars | Created | Last commit |
+|---:|---|---:|---|---|
+| 1 | [Guidance](https://github.com/guidance-ai/guidance) | 21,823 | 2022-11 | 2026-05-21 |
+| 2 | [Outlines](https://github.com/dottxt-ai/outlines) | 16,008 | 2023-03 | 2026-08-24 |
+| 3 | [AlphaGeometry](https://github.com/google-deepmind/alphageometry) | 4,903 | 2023-10 | 2026-01-05 |
+| 4 | [SymbolicAI](https://github.com/ExtensityAI/symbolicai) | 1,780 | 2022-11 | 2026-10-22 |
+| 5 | [LeanDojo](https://github.com/lean-dojo/LeanDojo) | 852 | 2023-06 | 2026-01-18 |
+| 6 | [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | 771 | 2021-07 | 2026-11-08 |
+| 7 | [Scallop](https://github.com/scallop-lang/scallop) | 525 | 2022-07 | 2026-06-26 |
+| 8 | [SynaLinks](https://github.com/SynaLinks/synalinks) | 464 | 2025-02 | 2026-11-07 |
+| 9 | [Logic Tensor Networks](https://github.com/logictensornetworks/logictensornetworks) | 376 | 2018-07 | 2026-11-07 |
+| 10 | [DeepProbLog](https://github.com/ML-KULeuven/deepproblog) | 362 | 2021-06 | 2026-09-29 |
+
+### Top 10 symbolic AI repositories
+
+| # | Repository | ⭐ Stars | Created | Last commit |
+|---:|---|---:|---|---|
+| 1 | [OR-Tools](https://github.com/google/or-tools) | 14,346 | 2015-02 | 2026-09-17 |
+| 2 | [Z3](https://github.com/Z3Prover/z3) | 12,902 | 2015-03 | 2026-11-08 |
+| 3 | [Lean 4](https://github.com/leanprover/lean4) | 9,918 | 2018-04 | 2026-11-07 |
+| 4 | [RDFLib](https://github.com/RDFLib/rdflib) | 2,550 | 2012-02 | 2026-11-02 |
+| 5 | [Scryer Prolog](https://github.com/mthom/scryer-prolog) | 2,470 | 2016-10 | 2026-10-22 |
+| 6 | [Protégé](https://github.com/protegeproject/protege) | 1,635 | 2013-08 | 2026-09-23 |
+| 7 | [cvc5](https://github.com/cvc5/cvc5) | 1,389 | 2012-12 | 2026-11-05 |
+| 8 | [Soufflé](https://github.com/souffle-lang/souffle) | 1,194 | 2016-03 | 2026-10-31 |
+| 9 | [OWL API](https://github.com/owlcs/owlapi) | 945 | 2013-02 | 2026-11-02 |
+| 10 | [Clingo](https://github.com/potassco/clingo) | 860 | 2016-05 | 2026-11-03 |
 
 ## Neurosymbolic Frameworks
 
@@ -124,18 +159,22 @@ Where most practical adoption is happening today: pairing large language models 
 | [AlphaGeometry](https://github.com/google-deepmind/alphageometry) | DeepMind's neurosymbolic system combining a language model with a symbolic deduction engine, reaching olympiad-level geometry. | 4,903 | 2023-10 | 1 | 2026-01-05 | 1 |
 | [Outlines](https://github.com/dottxt-ai/outlines) | Constrained text generation that guarantees LLM outputs conform to regular expressions, grammars, or JSON schemas via finite-state machines. | 16,008 | 2023-03 | 179 | 2026-08-24 | 164 |
 | [Guidance](https://github.com/guidance-ai/guidance) | Programming paradigm for steering LLMs with grammars, regular expressions, and control flow, with guaranteed output structure. | 21,823 | 2022-11 | 79 | 2026-05-21 | 25 |
-| [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models. | 771 | 2021-07 | 5 | 2026-11-08 | 454 |
+| [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models. | 771 | 2021-07 | 5 | 2026-11-08 | 455 |
 
 ## Papers
+
+> [!TIP]
+> **📌 Curated pick:** [Neuro-Symbolic Frameworks: Conceptual Characterization and Empirical Comparative Analysis](https://neurosymbolic-ai-journal.com/system/files/nai-paper-924_0.pdf) (Sinha, Premsri, Kamali and Kordjamshidi — Neurosymbolic Artificial Intelligence journal, 2026).
+> A conceptual characterization and head-to-head empirical comparison of NeSy frameworks, including DomiKnowS, DeepProbLog, and Scallop — the best single read before choosing a framework from this list.
 
 ### Surveys
 
 - [Neurosymbolic AI: The 3rd Wave](https://arxiv.org/abs/2012.05876) - Garcez and Lamb's influential position paper framing the modern neurosymbolic agenda (2020).
+- [The Next Decade in AI: Four Steps Towards Robust Artificial Intelligence](https://arxiv.org/abs/2002.06177) - Gary Marcus's hybrid-AI manifesto: robust AI needs hybrid neurosymbolic architectures, large-scale knowledge, explicit reasoning, and cognitive models (2020).
 - [Neurosymbolic AI — Why, What, and How](https://arxiv.org/abs/2305.00813) - Concise introduction by Sheth, Roy, and Gaur (2023).
 - [From Statistical Relational to Neurosymbolic Artificial Intelligence: A Survey](https://arxiv.org/abs/2108.11451) - Marra et al. connect neurosymbolic AI to its statistical relational learning roots (2021).
 - [Neuro-Symbolic AI and Its Taxonomy: A Survey](https://arxiv.org/abs/2305.08876) - Systematic taxonomy of integration patterns (2023).
 - [Survey on Applications of Neurosymbolic Artificial Intelligence](https://arxiv.org/abs/2209.12618) - Application-focused view of the field (2022).
-- [Neuro-Symbolic Frameworks: Conceptual Characterization and Empirical Comparative Analysis](https://neurosymbolic-ai-journal.com/system/files/nai-paper-924_0.pdf) - 2026 empirical comparison of DomiKnowS, DeepProbLog, and Scallop in the Neurosymbolic AI journal.
 - [Neurosymbolic AI for Reasoning Over Knowledge Graphs: A Survey](https://doi.org/10.1109/TNNLS.2024.3420218) - DeLong, Mir, and Fleuriot's IEEE TNNLS survey of neurosymbolic reasoning on graphs (2024).
 - [Neurosymbolic Programming](https://www.nowpublishers.com/article/Details/PGL-049) - Chaudhuri et al.'s Foundations and Trends monograph treating neurosymbolic systems as a programming languages problem (2021).
 
