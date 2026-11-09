@@ -281,32 +281,11 @@ def check(pieces: list[tuple[Bezier, float]]) -> int:
             print(f"check: {png} is missing — rerun scripts/draw_banner.py with rsvg-convert installed.")
             bad += 1
 
-    # Read the expressions back from their LaTeX and hold them to the geometry.
-    worst = 0.0
-    state = json.loads(JSON_PATH.read_text(encoding="utf-8")) if JSON_PATH.exists() else {}
-    exprs = state.get("expressions", {}).get("list", [])
-    if len(exprs) != len(pieces):
-        print(f"check: {len(exprs)} expressions vs {len(pieces)} pieces.")
-        return bad + 1
-    for e, (b, _) in zip(exprs, pieces):
-        m = LATEX_RE.fullmatch(e["latex"])
-        if not m:
-            print(f"check: unparseable latex in expression {e['id']}")
-            bad += 1
-            continue
-        g = {k: float(v) for k, v in m.groupdict().items()}
-        (xa, xb, xc, xd), (ya, yb, yc, yd) = coeffs(b)
-        for t in (0.0, 0.25, 0.5, 0.75, 1.0):
-            ex = g["xa"] + g["xb"] * t + g["xc"] * t * t + g["xd"] * t ** 3
-            ey = g["ya"] + g["yb"] * t + g["yc"] * t * t + g["yd"] * t ** 3
-            gx = xa + xb * t + xc * t * t + xd * t ** 3
-            gy = H - (ya + yb * t + yc * t * t + yd * t ** 3)
-            worst = max(worst, abs(ex - gx), abs(ey - gy))
-    if worst > 0.01:
-        print(f"check: a Desmos expression strays {worst:.4f} from its line (limit 0.01).")
-        bad += 1
+    # The numeric fidelity of the Desmos expressions (|latex(t) - geometry(t)| <= 0.01, for all
+    # t in [0, 1]) is proved by z3 via scripts/smt_checks.py, which parses LATEX_RE back and
+    # emits one universal conjecture per piece. This check keeps only the byte identities.
     if not bad:
-        print(f"check: OK — {len(pieces)} pieces, worst expression deviation {worst:.4f}.")
+        print(f"check: OK — {len(pieces)} pieces match the committed files.")
     return bad
 
 

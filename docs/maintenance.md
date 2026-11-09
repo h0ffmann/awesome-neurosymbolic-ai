@@ -21,7 +21,7 @@ Internal notes on how this repository is set up and maintained. Contributors don
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) on `README.md`, `scripts/check_list.py` on `README.base.md` (entry format, duplicate URLs, ToC consistency), and rejects direct edits to the generated readme. |
+| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) on `README.base.md`, plus the **Z3 checks**: `scripts/smt_checks.py` parses the repo into facts and emits SMT-LIB conjectures — entry format, duplicate URLs, ToC consistency (structure.smt2); ranking sortedness, star consistency, Top-10 maximality (rankings.smt2); and the banner's Desmos expressions staying within 0.01 of their lines for **all** t in [0, 1] (banner.smt2) — and [z3](https://github.com/Z3Prover/z3) must answer `unsat` to every negated conjecture. Also rejects direct edits to the generated readme. |
 | `links.yml` | weekly cron, PRs touching the markdown, manual | Runs [lychee](https://github.com/lycheeverse/lychee) with `lychee.toml`. Fails PRs on broken links; on the weekly run it opens an issue with the report instead. |
 | `stats.yml` | weekly cron, push to main touching `README.base.md`, manual | Rebuilds `README.md` with fresh repo metrics and commits it. |
 | `dependabot.yml` | monthly | Keeps the pinned GitHub Actions up to date, grouped into one PR. |
@@ -30,7 +30,7 @@ Run the checks locally:
 
 ```sh
 npx awesome-lint
-python scripts/check_list.py README.base.md
+python scripts/smt_checks.py                 # needs the z3 binary (or --emit-only DIR)
 python scripts/draw_banner.py --check
 GITHUB_TOKEN=$(gh auth token) python scripts/build_readme.py
 lychee --config lychee.toml README.base.md   # needs the lychee binary
