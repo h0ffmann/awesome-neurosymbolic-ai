@@ -108,7 +108,7 @@ Mature, production-grade symbolic engines. These are the reasoning backbones tha
 
 ## LLMs and Symbolic Reasoning
 
-Where most practical adoption is happening today: pairing large language models with symbolic engines that check, constrain, or execute their outputs.
+Where most practical adoption is happening today: pairing large language models with symbolic engines that check, constrain, or execute their outputs — and grounding them in structured, curated knowledge.
 
 - [SynaLinks](https://github.com/SynaLinks/synalinks) - Keras-inspired framework for building neurosymbolic language-model applications with knowledge graphs and constrained structured output.
 - [SymbolicAI](https://github.com/ExtensityAI/symbolicai) - Compositional differentiable programming library that treats LLMs as semantic parsers embedded in a symbolic framework.
@@ -117,6 +117,10 @@ Where most practical adoption is happening today: pairing large language models 
 - [Outlines](https://github.com/dottxt-ai/outlines) - Constrained text generation that guarantees LLM outputs conform to regular expressions, grammars, or JSON schemas via finite-state machines.
 - [Guidance](https://github.com/guidance-ai/guidance) - Programming paradigm for steering LLMs with grammars, regular expressions, and control flow, with guaranteed output structure.
 - [Nucleoid](https://github.com/NucleoidAI/Nucleoid) - Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models.
+- [XERJ](https://github.com/xerj-org/xerj) - Local-first AI search engine and MCP server in one Rust binary: BM25, vector, and hybrid search for agent memory and RAG, with Corpus Hub serving pinned reference corpora as ground truth.
+- [GraphRAG](https://github.com/microsoft/graphrag) - Microsoft's modular graph-based RAG: an LLM extracts a knowledge graph from documents, and queries reason over its structure rather than raw chunks.
+- [Graphiti](https://github.com/getzep/graphiti) - Builds real-time, temporally aware knowledge graphs that serve as queryable memory for AI agents, from Zep.
+- [cognee](https://github.com/topoteretes/cognee) - Open-source memory platform for agents that turns data into a knowledge graph combined with vector search.
 
 ## Papers
 
