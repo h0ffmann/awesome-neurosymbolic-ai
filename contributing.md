@@ -44,7 +44,7 @@ Entries follow the [awesome-lint](https://github.com/sindresorhus/awesome-lint) 
 
    ```sh
    npx awesome-lint
-   python scripts/check_list.py README.base.md
+   python scripts/smt_checks.py   # needs the z3 binary; CI runs it too
    ```
 
 4. Open a pull request with the title `Add Project Name` and fill in the template, including a line on **why** the entry is awesome.
@@ -53,7 +53,7 @@ Pull requests are also welcome for *removing* entries that have become unmaintai
 
 ## Review process
 
-- CI runs `awesome-lint`, a structural check (`scripts/check_list.py`), and a link check on every pull request; all must pass.
+- CI runs `awesome-lint`, the Z3 checks (`scripts/smt_checks.py` — every structural rule is an SMT conjecture that z3 must answer `unsat`), and a link check on every pull request; all must pass.
 - A maintainer reviews for relevance and quality. We may ask questions or suggest a different section.
 - Maintainers' decisions on curation are final, but you are always welcome to make the case for an entry in the pull request thread.
 

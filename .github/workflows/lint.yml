@@ -25,8 +25,8 @@ jobs:
       - name: Run awesome-lint
         run: npx --yes awesome-lint README.base.md
 
-  structure:
-    name: List structure check
+  z3-checks:
+    name: Z3 checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -35,9 +35,11 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Validate entries, ToC, and duplicates (source of truth)
-        run: python scripts/check_list.py README.base.md
-      - name: Check the banner drawing against its Desmos equations
+      - name: Install z3
+        run: sudo apt-get update -q && sudo apt-get install -y -q z3 && z3 --version
+      - name: Decide structure, rankings, and banner fidelity with z3
+        run: python scripts/smt_checks.py
+      - name: Check the banner files are the pen's output
         run: python scripts/draw_banner.py --check
       - name: Ensure PRs edit README.base.md, not the generated README.md
         if: github.event_name == 'pull_request'
