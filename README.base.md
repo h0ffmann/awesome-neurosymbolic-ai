@@ -64,6 +64,7 @@ Languages and libraries whose core purpose is integrating neural networks with s
 - [PyNeuraLogic](https://github.com/LukasZahradnik/PyNeuraLogic) - Differentiable relational logic templates that generalize and extend graph neural networks.
 - [PyReason](https://github.com/lab-v2/pyreason) - Explainable reasoning over graphs with open-world annotated logic, supporting temporal reasoning.
 - [dPASP](https://github.com/kamel-usp/dpasp) - Differentiable probabilistic answer set programming framework for neurosymbolic inference and learning.
+- [Vehicle](https://github.com/vehicle-lang/vehicle) - Specification language for neural networks that compiles one logical spec into a differentiable training loss, verifier queries, and Agda, Rocq, or Isabelle proofs.
 
 ## Symbolic Foundations
 
