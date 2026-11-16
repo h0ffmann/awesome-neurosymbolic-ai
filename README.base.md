@@ -159,6 +159,7 @@ Where most practical adoption is happening today: pairing large language models 
 
 - [Summer School on Neurosymbolic Programming](https://www.neurosymbolic.org) - Annual summer school with recorded lectures from leading researchers.
 - [IBM Neuro-Symbolic AI Toolkit](https://ibm.github.io/neuro-symbolic-ai) - Entry point to IBM's neurosymbolic projects, papers, and demos.
+- [proof](https://github.com/h0ffmann/proof) - Worked examples of prover-checked specifications in Agda (`--safe`, no postulates) and Lean 4, including a contextual bandit's decision layer over a probabilistic reward model, proved for every number of arms and ported to Haskell.
 
 ## Benchmarks and Datasets
 
