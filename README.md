@@ -28,6 +28,10 @@ Neurosymbolic AI pairs the perception, flexibility, and scale of neural networks
 
 Entries are curated: each one is maintained, documented, and useful in practice or foundational in the literature. Read the contribution guidelines (linked at the bottom) before suggesting an addition.
 
+> [!TIP]
+> **📌 Featured project:** [TV-Audience](https://github.com/h0ffmann/proof/tree/main/tv-audience).
+> Forecasts prime-time TV audiences seven days ahead as a competition between channels, comparing XGBoost, an MLP, Mistral's Timestral, a Joint Competitive Share model, and a neurosymbolic JCS, with the metrics and share layer formalized and proved in Agda.
+
 ## Contents
 
 - [Rankings](#rankings)
@@ -55,8 +59,8 @@ Generated from the list's own entries and their live metrics: the ten most starr
 | # | Repository | ⭐ Stars | Created | Last commit |
 |---:|---|---:|---|---|
 | 1 | [GraphRAG](https://github.com/microsoft/graphrag) | 36,658 | 2024-03 | 2026-11-02 |
-| 2 | [cognee](https://github.com/topoteretes/cognee) | 33,350 | 2023-08 | 2026-11-16 |
-| 3 | [Graphiti](https://github.com/getzep/graphiti) | 32,857 | 2024-08 | 2026-11-15 |
+| 2 | [cognee](https://github.com/topoteretes/cognee) | 33,351 | 2023-08 | 2026-11-16 |
+| 3 | [Graphiti](https://github.com/getzep/graphiti) | 32,859 | 2024-08 | 2026-11-15 |
 | 4 | [Guidance](https://github.com/guidance-ai/guidance) | 21,825 | 2022-11 | 2026-05-21 |
 | 5 | [XERJ](https://github.com/xerj-org/xerj) | 19,153 | 2026-06 | 2026-11-09 |
 | 6 | [Outlines](https://github.com/dottxt-ai/outlines) | 16,012 | 2023-03 | 2026-08-24 |
@@ -162,8 +166,8 @@ Where most practical adoption is happening today: pairing large language models 
 | [Nucleoid](https://github.com/NucleoidAI/Nucleoid) | Declarative logic runtime that accumulates statements into an adaptive logic graph, positioned as neurosymbolic infrastructure for world models. | 770 | 2021-07 | 5 | 2026-11-16 | 532 |
 | [XERJ](https://github.com/xerj-org/xerj) | Local-first AI search engine and MCP server in one Rust binary: BM25, vector, and hybrid search for agent memory and RAG, with Corpus Hub serving pinned reference corpora as ground truth. | 19,153 | 2026-06 | 120 | 2026-11-09 | 4,176 |
 | [GraphRAG](https://github.com/microsoft/graphrag) | Microsoft's modular graph-based RAG: an LLM extracts a knowledge graph from documents, and queries reason over its structure rather than raw chunks. | 36,658 | 2024-03 | 51 | 2026-11-02 | 84 |
-| [Graphiti](https://github.com/getzep/graphiti) | Builds real-time, temporally aware knowledge graphs that serve as queryable memory for AI agents, from Zep. | 32,857 | 2024-08 | 64 | 2026-11-15 | 351 |
-| [cognee](https://github.com/topoteretes/cognee) | Open-source memory platform for agents that turns data into a knowledge graph combined with vector search. | 33,350 | 2023-08 | 303 | 2026-11-16 | 7,803 |
+| [Graphiti](https://github.com/getzep/graphiti) | Builds real-time, temporally aware knowledge graphs that serve as queryable memory for AI agents, from Zep. | 32,859 | 2024-08 | 64 | 2026-11-15 | 351 |
+| [cognee](https://github.com/topoteretes/cognee) | Open-source memory platform for agents that turns data into a knowledge graph combined with vector search. | 33,351 | 2023-08 | 303 | 2026-11-16 | 7,803 |
 
 ## Papers
 

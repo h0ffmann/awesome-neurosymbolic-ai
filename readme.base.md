@@ -23,6 +23,10 @@ Neurosymbolic AI pairs the perception, flexibility, and scale of neural networks
 
 Entries are curated: each one is maintained, documented, and useful in practice or foundational in the literature. Read the contribution guidelines (linked at the bottom) before suggesting an addition.
 
+> [!TIP]
+> **📌 Featured project:** [TV-Audience](https://github.com/h0ffmann/proof/tree/main/tv-audience).
+> Forecasts prime-time TV audiences seven days ahead as a competition between channels, comparing XGBoost, an MLP, Mistral's Timestral, a Joint Competitive Share model, and a neurosymbolic JCS, with the metrics and share layer formalized and proved in Agda.
+
 ## Contents
 
 - [Rankings](#rankings)
