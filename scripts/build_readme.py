@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Build README.md from README.base.md, with live GitHub metrics.
+"""Build README.md from readme.base.md, with live GitHub metrics.
 
-- ``README.base.md`` is the file humans edit, in canonical awesome-list form
-  (checked by check_list.py and awesome-lint in CI).
+- ``readme.base.md`` is the file humans edit, in canonical awesome-list form
+  (checked by scripts/smt_checks.py and awesome-lint in CI).
 - ``README.md`` is generated. For every entry whose primary link is a GitHub
   repository, metrics are fetched: stars, creation date, number of
   contributors, last default-branch commit date, and commits in the current
@@ -18,7 +18,7 @@
   bullets untouched.
 
 Usage:
-    GITHUB_TOKEN=... python scripts/build_readme.py [README.base.md] [README.md]
+    GITHUB_TOKEN=... python scripts/build_readme.py [readme.base.md] [README.md]
     python scripts/build_readme.py --metrics-tsv metrics.tsv   # offline metrics
 
 Stdlib only; no dependencies. The token is optional but strongly recommended
@@ -49,7 +49,7 @@ GH = re.compile(r"^https://github\.com/(?P<owner>[A-Za-z0-9_.-]+)/(?P<repo>[A-Za
 HEADER = """\
 <!--
   GENERATED FILE - do not edit directly.
-  Source of truth: README.base.md (edit that file in pull requests).
+  Source of truth: readme.base.md (edit that file in pull requests).
   Built by scripts/build_readme.py via .github/workflows/stats.yml.
 -->
 """
@@ -325,6 +325,6 @@ if __name__ == "__main__":
         i = args.index("--metrics-tsv")
         tsv = Path(args[i + 1])
         del args[i : i + 2]
-    src = Path(args[0]) if len(args) > 0 else Path("README.base.md")
+    src = Path(args[0]) if len(args) > 0 else Path("readme.base.md")
     dst = Path(args[1]) if len(args) > 1 else Path("README.md")
     sys.exit(main(src, dst, tsv))

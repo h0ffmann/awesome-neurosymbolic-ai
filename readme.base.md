@@ -40,7 +40,6 @@ Entries are curated: each one is maintained, documented, and useful in practice 
 - [Courses and Tutorials](#courses-and-tutorials)
 - [Benchmarks and Datasets](#benchmarks-and-datasets)
 - [Community](#community)
-- [Contributing](#contributing)
 
 ## Rankings
 

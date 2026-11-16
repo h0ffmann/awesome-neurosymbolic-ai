@@ -9,7 +9,7 @@ counterexample.
 What z3 decides (previously scripts/check_list.py and the numeric part of
 draw_banner.py --check):
 
-structure.smt2  — README.base.md is a well-formed awesome list:
+structure.smt2  — readme.base.md is a well-formed awesome list:
   s1  every list entry matches '- [Name](url) - Description.'
   s2  no duplicate link targets (after URL normalization)
   s3  no trailing slash in entry URLs
@@ -48,7 +48,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from draw_banner import coeffs, drawing, H, JSON_PATH, LATEX_RE  # noqa: E402
 
-BASE = Path("README.base.md")
+BASE = Path("readme.base.md")
 GENERATED = Path("README.md")
 
 ENTRY = re.compile(r"^- \[(?P<name>[^\]]+)\]\((?P<url>https?://[^)\s]+)\)(?: - (?P<desc>.+))?$")
@@ -84,7 +84,7 @@ def block(out: list[str], comment: str, negated: str) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Facts from README.base.md
+# Facts from readme.base.md
 # ---------------------------------------------------------------------------
 
 def parse_base():
@@ -136,7 +136,7 @@ def parse_base():
 
 
 def structure_smt(sections, toc, entries) -> str:
-    out = ["; README.base.md structure. Every answer must be unsat.\n"]
+    out = ["; readme.base.md structure. Every answer must be unsat.\n"]
 
     flags = " ".join("true" if not e["fmt_ok"] else "false" for e in entries) or "false"
     block(out, "s1: some entry does not match '- [Name](url) - Description.'", f"(or {flags})")

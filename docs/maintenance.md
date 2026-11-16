@@ -15,15 +15,15 @@ Internal notes on how this repository is set up and maintained. Contributors don
 
 ## Automation overview
 
-## README.base.md vs README.md
+## readme.base.md vs README.md
 
-`README.base.md` is the **source of truth** that humans edit, kept in canonical awesome-list form (awesome-lint runs against it). `README.md` is **generated** by `scripts/build_readme.py`, which adds live metrics to every entry whose primary link is a GitHub repository: a list block with more than five entries renders as a table with ⭐ Stars / Created / Contributors / Last commit / Commits in the current year columns, and smaller blocks stay bullets with `⭐ stars · created YYYY-MM · N contributors · last commit YYYY-MM-DD · N commits in <year>` appended. The Metrics workflow rebuilds it weekly and on every push to main that touches the base file; CI blocks PRs that edit `README.md` without `README.base.md`.
+`readme.base.md` is the **source of truth** that humans edit, kept in canonical awesome-list form (awesome-lint runs against it). `README.md` is **generated** by `scripts/build_readme.py`, which adds live metrics to every entry whose primary link is a GitHub repository: a list block with more than five entries renders as a table with ⭐ Stars / Created / Contributors / Last commit / Commits in the current year columns, and smaller blocks stay bullets with `⭐ stars · created YYYY-MM · N contributors · last commit YYYY-MM-DD · N commits in <year>` appended. The Metrics workflow rebuilds it weekly and on every push to main that touches the base file; CI blocks PRs that edit `README.md` without `readme.base.md`.
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) on `README.base.md`, plus the **Z3 checks**: `scripts/smt_checks.py` parses the repo into facts and emits SMT-LIB conjectures — entry format, duplicate URLs, ToC consistency (structure.smt2); ranking sortedness, star consistency, Top-10 maximality (rankings.smt2); and the banner's Desmos expressions staying within 0.01 of their lines for **all** t in [0, 1] (banner.smt2) — and [z3](https://github.com/Z3Prover/z3) must answer `unsat` to every negated conjecture. Also rejects direct edits to the generated readme. |
+| `lint.yml` | push to main, PRs | Runs [awesome-lint](https://github.com/sindresorhus/awesome-lint) on `readme.base.md`, plus the **Z3 checks**: `scripts/smt_checks.py` parses the repo into facts and emits SMT-LIB conjectures — entry format, duplicate URLs, ToC consistency (structure.smt2); ranking sortedness, star consistency, Top-10 maximality (rankings.smt2); and the banner's Desmos expressions staying within 0.01 of their lines for **all** t in [0, 1] (banner.smt2) — and [z3](https://github.com/Z3Prover/z3) must answer `unsat` to every negated conjecture. Also rejects direct edits to the generated readme. |
 | `links.yml` | weekly cron, PRs touching the markdown, manual | Runs [lychee](https://github.com/lycheeverse/lychee) with `lychee.toml`. Fails PRs on broken links; on the weekly run it opens an issue with the report instead. |
-| `stats.yml` | weekly cron, push to main touching `README.base.md`, manual | Rebuilds `README.md` with fresh repo metrics and commits it. |
+| `stats.yml` | weekly cron, push to main touching `readme.base.md`, manual | Rebuilds `README.md` with fresh repo metrics and commits it. |
 | `dependabot.yml` | monthly | Keeps the pinned GitHub Actions up to date, grouped into one PR. |
 
 Run the checks locally:
@@ -33,7 +33,7 @@ npx awesome-lint
 python scripts/smt_checks.py                 # needs the z3 binary (or --emit-only DIR)
 python scripts/draw_banner.py --check
 GITHUB_TOKEN=$(gh auth token) python scripts/build_readme.py
-lychee --config lychee.toml README.base.md   # needs the lychee binary
+lychee --config lychee.toml readme.base.md   # needs the lychee binary
 ```
 
 The banner is a drawing from Desmos equations; see [`assets/README.md`](../assets/README.md).
